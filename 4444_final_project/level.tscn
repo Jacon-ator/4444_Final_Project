@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://btgkpibfq57f6"]
+[gd_scene load_steps=8 format=4 uid="uid://btgkpibfq57f6"]
 
 [ext_resource type="Texture2D" uid="uid://ch665wb8v33f6" path="res://tilemap palette.png" id="1_oi3di"]
 [ext_resource type="Script" uid="uid://jn1ggyj71bf7" path="res://player.gd" id="1_vonw3"]
 [ext_resource type="Texture2D" uid="uid://dt1rk5ngjig2e" path="res://icon.svg" id="2_oi3di"]
+[ext_resource type="Script" uid="uid://bqumxyqjo77yu" path="res://button.gd" id="4_0b4ue"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oi3di"]
 texture = ExtResource("1_oi3di")
@@ -38,3 +39,18 @@ scale = Vector2(6, 6)
 shape = SubResource("RectangleShape2D_vonw3")
 
 [node name="Camera" type="Camera2D" parent="."]
+
+[node name="Debug Button" type="Button" parent="."]
+offset_left = 512.0
+offset_top = -320.0
+offset_right = 576.0
+offset_bottom = -256.0
+text = "Debug"
+script = ExtResource("4_0b4ue")
+
+[node name="Menu Button" type="Button" parent="."]
+offset_left = -576.0
+offset_top = -320.0
+offset_right = -512.0
+offset_bottom = -256.0
+text = "Menu"
