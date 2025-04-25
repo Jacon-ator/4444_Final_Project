@@ -1,42 +1,26 @@
 extends CharacterBody2D
 
 const tile_size = 32
-const move_speed = 0.35
-var moving = false
+# Removed move_speed as movement is now instant per frame
+# Removed moving variable
 var input_dir
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
-	# Sets input direction to zero
-	input_dir = Vector2.ZERO
-	
-	# Sets each direction to the approporiate vec2
-	if Input.is_action_pressed("ui_down"):
-		input_dir = Vector2(0,1)
-		move()
-	elif Input.is_action_pressed("ui_up"):
-		input_dir = Vector2(0,-1)
-		move()
-	elif Input.is_action_pressed("ui_right"):
+	# Check for input - use is_action_just_pressed for single step per press
+	if Input.is_action_just_pressed("ui_down"):
+		input_dir = Vector2(0, 1)
+	elif Input.is_action_just_pressed("ui_up"):
+		input_dir = Vector2(0, -1)
+	elif Input.is_action_just_pressed("ui_right"):
 		input_dir = Vector2(1, 0)
-		move()
-	elif Input.is_action_pressed("ui_left"):
+	elif Input.is_action_just_pressed("ui_left"):
 		input_dir = Vector2(-1, 0)
-		move()
-	
-# Function for grid based movement
-func move():
-	if input_dir:
-		if moving == false:
-			moving = true
-			var tween = create_tween()
-			tween.tween_property(self, "position", position + input_dir*tile_size, move_speed)
-			tween.tween_callback(move_false)
-			
-# Sets moving to false
-func move_false():
-	moving = false
-	
-	
-	
-	
+	else:
+		# No input this frame
+		input_dir = Vector2.ZERO
+
+	# If there was input, attempt to move
+	if input_dir != Vector2.ZERO:
+		var motion = input_dir * tile_size
+		move_and_collide(motion)
