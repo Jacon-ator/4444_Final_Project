@@ -5,19 +5,20 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7k104"]
 blend_mode = 2
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
-size = Vector2(93, 89)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
+size = Vector2(95, 92)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_7k104")
-scale = Vector2(0.8, 0.8)
+position = Vector2(0, 5)
+scale = Vector2(0.766, 0.766)
 texture = ExtResource("2_qi2p4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -0.500001)
-shape = SubResource("RectangleShape2D_4gyqm")
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_7k104")
 
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 0.245
