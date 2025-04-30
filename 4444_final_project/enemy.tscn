@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7gpu5v0govut"]
+[gd_scene load_steps=5 format=3 uid="uid://b7gpu5v0govut"]
 
+[ext_resource type="Script" uid="uid://0sg6d68pnwct" path="res://scripts/enemy.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://dt1rk5ngjig2e" path="res://icon.svg" id="2_qi2p4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7k104"]
@@ -8,7 +9,10 @@ blend_mode = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
 size = Vector2(95, 92)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D"]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_4gyqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_7k104")
@@ -20,5 +24,15 @@ texture = ExtResource("2_qi2p4")
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_7k104")
 
-[node name="MoveTimer" type="Timer" parent="."]
-wait_time = 0.245
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+debug_enabled = true
+debug_path_custom_color = Color(1, 0.0784314, 0.129412, 1)
+debug_path_custom_point_size = 32.29
+debug_path_custom_line_width = 1.94
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.137
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

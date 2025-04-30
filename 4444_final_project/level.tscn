@@ -2,10 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://ch665wb8v33f6" path="res://tilemap palette.png" id="1_oi3di"]
 [ext_resource type="PackedScene" uid="uid://b7gpu5v0govut" path="res://enemy.tscn" id="3_0b4ue"]
-[ext_resource type="Script" uid="uid://ok0d7wlnju83" path="res://scripts/enemy.gd" id="3_1ainy"]
 [ext_resource type="Script" uid="uid://bkvel1jf7ipqg" path="res://scripts/button.gd" id="4_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://cfxq7vqqmysnp" path="res://player.tscn" id="4_f2txt"]
 [ext_resource type="Script" uid="uid://33nkiof8nr8" path="res://scripts/player.gd" id="5_n6hdu"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1ainy"]
+vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
+agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oi3di"]
 texture = ExtResource("1_oi3di")
@@ -13,10 +18,12 @@ texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_1ainy")
 
 [sub_resource type="TileSet" id="TileSet_0b4ue"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_oi3di")
 
 [node name="Level" type="Node2D"]
@@ -26,12 +33,6 @@ tile_map_data = PackedByteArray("AADu//b/AAAAAAAAAADv//b/AAAAAAAAAADw//b/AAAAAAA
 tile_set = SubResource("TileSet_0b4ue")
 
 [node name="Camera" type="Camera2D" parent="."]
-
-[node name="Enemy" parent="." node_paths=PackedStringArray("player_node", "tile_map_node") instance=ExtResource("3_0b4ue")]
-position = Vector2(495, 240)
-script = ExtResource("3_1ainy")
-player_node = NodePath("../Player")
-tile_map_node = NodePath("../TileMapLayer")
 
 [node name="Player" parent="." instance=ExtResource("4_f2txt")]
 position = Vector2(-497, -246)
@@ -45,9 +46,6 @@ offset_bottom = -256.0
 text = "Debug"
 script = ExtResource("4_0b4ue")
 
-[node name="Menu Button" type="Button" parent="."]
-offset_left = -576.0
-offset_top = -320.0
-offset_right = -512.0
-offset_bottom = -256.0
-text = "Menu"
+[node name="Enemy" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("3_0b4ue")]
+position = Vector2(100, -206)
+player_node = NodePath("../Player")
