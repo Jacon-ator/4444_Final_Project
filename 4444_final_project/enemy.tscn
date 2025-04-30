@@ -31,7 +31,7 @@ debug_path_custom_point_size = 15.94
 debug_path_custom_line_width = 5.0
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.2
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
