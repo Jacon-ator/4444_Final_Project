@@ -26,13 +26,12 @@ shape = SubResource("RectangleShape2D_7k104")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
-debug_enabled = true
 debug_path_custom_color = Color(1, 0.0784314, 0.129412, 1)
-debug_path_custom_point_size = 32.29
-debug_path_custom_line_width = 1.94
+debug_path_custom_point_size = 15.94
+debug_path_custom_line_width = 5.0
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.137
+wait_time = 0.15
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -46,4 +46,11 @@ func _on_timer_timeout() -> void:
 		# only move when valid move available
 		if grid_direction != Vector2.ZERO:
 			var motion = grid_direction * TILE_SIZE
-			move_and_collide(motion)
+			var collision = move_and_collide(motion)
+			if collision:
+				var body = collision.get_collider()
+				# compare to your player node reference
+				if body == player_node:
+					# Reload the current scene
+					get_tree().reload_current_scene()
+			
